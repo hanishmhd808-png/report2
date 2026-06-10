@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>News Channel Work Report</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">
+          <img src="assets/cn-tv-logo.png" alt="CN TV logo" />
+        </span>
+        <div>
+          <strong>CN TV Work Report</strong>
+          <span>Attendance, daily work, and social media tracking</span>
+        </div>
+      </div>
+      <div class="today">
+        <span id="todayLabel">Today</span>
+        <strong id="liveClock">--:--</strong>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="summary-panel">
+        <div class="summary-copy">
+          <p class="eyebrow">Daily Control Room</p>
+          <h1>Employee Work Report</h1>
+          <p>Track who reached office, when they left, what work they completed, and how many videos were posted on each social media account.</p>
+        </div>
+        <div class="summary-stats" aria-label="Today summary">
+          <article>
+            <span id="presentCount">0</span>
+            <p>In office</p>
+          </article>
+          <article>
+            <span id="workCount">0</span>
+            <p>Works done</p>
+          </article>
+          <article>
+            <span id="videoCount">0</span>
+            <p>Videos posted</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Report filters">
+        <label>
+          Report date
+          <input id="reportDate" type="date" />
+        </label>
+        <button id="exportBtn" type="button">Download CSV</button>
+        <button id="shareBtn" type="button">Share Report</button>
+        <a class="button-link quiet" href="admin.html">Admin Control</a>
+      </section>
+
+      <section class="panel share-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Share</p>
+            <h2>Daily Report Message</h2>
+          </div>
+          <span id="shareStatus" class="hint">Copy or share this report with the team.</span>
+        </div>
+        <textarea id="shareText" rows="7" readonly></textarea>
+        <div class="share-actions">
+          <button id="copyShareBtn" type="button">Copy Message</button>
+          <a id="whatsappShare" class="share-link whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a id="emailShare" class="share-link email" href="#">Email</a>
+        </div>
+      </section>
+
+      <section class="grid two-columns">
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Staff</p>
+              <h2>Attendance</h2>
+            </div>
+            <span class="hint">Use In and Out when staff enter or leave office.</span>
+          </div>
+          <div id="employeeList" class="employee-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Create Entry</p>
+              <h2>Work Done</h2>
+            </div>
+          </div>
+          <form id="workForm" class="work-form">
+            <label>
+              Employee
+              <select id="workEmployee"></select>
+            </label>
+            <label>
+              Work type
+              <select id="workType">
+                <option>Video editing</option>
+                <option>Camera work</option>
+                <option>Anchoring</option>
+                <option>Poster design</option>
+                <option>Social media upload</option>
+                <option>News package</option>
+                <option>Other newsroom work</option>
+              </select>
+            </label>
+            <label>
+              Work title or details
+              <textarea id="workDetails" rows="4" placeholder="Example: Edited district news package and uploaded final video"></textarea>
+            </label>
+            <label>
+              Count
+              <input id="workAmount" type="number" min="1" value="1" />
+            </label>
+            <button type="submit">Add Work</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="grid two-columns social-and-log">
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Social Media</p>
+              <h2>Video Posting Count</h2>
+            </div>
+            <span class="hint">Two accounts each for Instagram, YouTube, and Facebook.</span>
+          </div>
+          <div id="socialGrid" class="social-grid"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Today</p>
+              <h2>Work Log</h2>
+            </div>
+          </div>
+          <div id="workLog" class="work-log"></div>
+        </div>
+      </section>
+
+      <section class="panel whatsapp-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">WhatsApp</p>
+            <h2>News Sharing Report</h2>
+          </div>
+          <span class="hint">Record which employee shared news in WhatsApp.</span>
+        </div>
+        <form id="whatsappForm" class="whatsapp-form">
+          <label>
+            Shared by
+            <select id="whatsappEmployee"></select>
+          </label>
+          <label>
+            News shares
+            <input id="whatsappCount" type="number" min="1" value="1" />
+          </label>
+          <label>
+            Note
+            <input id="whatsappNote" placeholder="Example: Morning bulletin shared to groups" />
+          </label>
+          <button type="submit">Add Share</button>
+        </form>
+        <div id="whatsappLog" class="whatsapp-log"></div>
+      </section>
+
+      <section class="panel whatsapp-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">WhatsApp Ads</p>
+            <h2>Ad Sharing Report</h2>
+          </div>
+          <span class="hint">Record which employee shared advertisements in WhatsApp.</span>
+        </div>
+        <form id="whatsappAdForm" class="whatsapp-form">
+          <label>
+            Shared by
+            <select id="whatsappAdEmployee"></select>
+          </label>
+          <label>
+            Ad shares
+            <input id="whatsappAdCount" type="number" min="1" value="1" />
+          </label>
+          <label>
+            Note
+            <input id="whatsappAdNote" placeholder="Example: Client ad shared to groups" />
+          </label>
+          <button type="submit">Add Ad Share</button>
+        </form>
+        <div id="whatsappAdLog" class="whatsapp-log"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Overview</p>
+            <h2>Employee Report Table</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Role</th>
+                <th>In time</th>
+                <th>Out time</th>
+                <th>Works</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="reportTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <template id="employeeTemplate">
+      <article class="employee-card">
+        <div class="avatar"></div>
+        <div class="employee-main">
+          <h3></h3>
+          <p></p>
+          <div class="time-row">
+            <span class="in-time">In: --</span>
+            <span class="out-time">Out: --</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="in-btn" type="button">In</button>
+          <button class="out-btn quiet" type="button">Out</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>

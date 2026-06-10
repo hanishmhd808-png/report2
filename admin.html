@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CN TV Admin Control</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">
+          <img src="assets/cn-tv-logo.png" alt="CN TV logo" />
+        </span>
+        <div>
+          <strong>Admin Control</strong>
+          <span>Overall control for CN TV work reports</span>
+        </div>
+      </div>
+      <a class="button-link quiet" href="index.html">Back to Report</a>
+    </header>
+
+    <main class="app-shell">
+      <section class="summary-panel admin-hero">
+        <div class="summary-copy">
+          <p class="eyebrow">Admin</p>
+          <h1>Overall Control</h1>
+          <p>Review the selected day, reset only from this page, and manage saved report data.</p>
+        </div>
+        <div class="summary-stats" aria-label="Admin summary">
+          <article>
+            <span id="adminEmployees">0</span>
+            <p>Employees</p>
+          </article>
+          <article>
+            <span id="adminWorks">0</span>
+            <p>Works</p>
+          </article>
+          <article>
+            <span id="adminShares">0</span>
+            <p>Shares</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Admin filters">
+        <label>
+          Report date
+          <input id="adminDate" type="date" />
+        </label>
+        <button id="adminResetDay" type="button">Reset Selected Day</button>
+        <button id="adminClearAll" type="button" class="quiet">Clear All Saved Reports</button>
+      </section>
+
+      <section class="grid two-columns">
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Selected Day</p>
+              <h2>Report Totals</h2>
+            </div>
+          </div>
+          <div id="adminTotals" class="admin-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Saved Dates</p>
+              <h2>Available Reports</h2>
+            </div>
+          </div>
+          <div id="adminDates" class="admin-list"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Staff</p>
+            <h2>Employee Status</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>In</th>
+                <th>Out</th>
+                <th>Works</th>
+                <th>WhatsApp News</th>
+                <th>WhatsApp Ads</th>
+              </tr>
+            </thead>
+            <tbody id="adminTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
